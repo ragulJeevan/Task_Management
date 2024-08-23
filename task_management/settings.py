@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'user_management',
+<<<<<<< HEAD
     'project_management'
+=======
+    'foundation',
+>>>>>>> 584e46e2f957ca26acc4e3e4ca7533f590e58653
 ]
 
 MIDDLEWARE = [
