@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Status,Type,Stage,Complexity,Prority,Sdlc
+from .models import Status,Type,Stage,Complexity,Priority,Sdlc
 
 # Status 
 class StatusSerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class ComplexitySerializer(serializers.ModelSerializer):
 # PRIORITY 
 class PrioritySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Prority
+        model = Priority
         fields = '__all__'
 # SDLC 
 class SdlcSerializer(serializers.ModelSerializer):

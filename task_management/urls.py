@@ -23,4 +23,6 @@ urlpatterns = [
     path('api_foundation/', include('foundation.urls')), 
     # USER MANAGEMENT 
     path('api_user_management/', include('user_management.urls')),   
+    # PROJECT MANAGEMENT 
+    path('api_project_management/', include('project_management.urls')),  
 ]

@@ -1,14 +1,14 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from foundation.models import Prority
+from foundation.models import Priority
 from foundation.serializers import PrioritySerializer
 from user_management.common.utils import api_response, api_error_response
 from django.http import Http404
 
-modelName = "Prority"
-notFound = "Prority not found"
-ModelName = Prority
+modelName = "Priority"
+notFound = "Priority not found"
+ModelName = Priority
 SerializerName = PrioritySerializer
 
 
@@ -31,7 +31,7 @@ class PriorityList(APIView):
         except Exception as e:
             return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-class ProrityDetail(APIView):
+class PriorityDetail(APIView):
     def get_object(self, pk):
         try:
             return ModelName.objects.get(pk=pk)
