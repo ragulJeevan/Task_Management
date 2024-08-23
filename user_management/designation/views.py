@@ -7,19 +7,22 @@ from user_management.common.utils import api_response, api_error_response
 from django.http import Http404
 
 modelName = "Designation"
+ModelName = Designation
+SerializerName = DesignationSerializer
+notFound = "Designation not found"
 
 class DesignationList(APIView):
     def get(self, request):
-        try:
-            designations = Designation.objects.all()
-            serializer = DesignationSerializer(designations, many=True)
-            return api_response(serializer.data, modelName, 'get')
-        except Exception as e:
-            return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
+         try:
+             requestData = ModelName.objects.all()
+             serializer = SerializerName(requestData, many=True)
+             return api_response(serializer.data, modelName, 'get')
+         except Exception as e:
+             return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    def post(self, request):
+    def post(self, request):   
         try:
-            serializer = DesignationSerializer(data=request.data)
+            serializer = SerializerName(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return api_response(serializer.data, modelName, 'save')
@@ -30,39 +33,39 @@ class DesignationList(APIView):
 class DesignationDetail(APIView):
     def get_object(self, pk):
         try:
-            return Designation.objects.get(pk=pk)
-        except Designation.DoesNotExist:
+            return ModelName.objects.get(pk=pk)
+        except ModelName.DoesNotExist:
             raise Http404
 
     def get(self, request, pk):
         try:
-            designation = self.get_object(pk)
-            serializer = DesignationSerializer(designation)
+            requestData = self.get_object(pk)
+            serializer = SerializerName(requestData)
             return api_response(serializer.data, modelName, 'get')
         except Http404:
-            return api_error_response(["Designation not found"], status.HTTP_404_NOT_FOUND)
+            return api_error_response([notFound], status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def put(self, request, pk):
         try:
-            designation = self.get_object(pk)
-            serializer = DesignationSerializer(designation, data=request.data)
+            requestData = self.get_object(pk)
+            serializer = SerializerName(requestData, data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 return api_response(serializer.data, modelName, 'update')
             return api_error_response(serializer.errors)
         except Http404:
-            return api_error_response(["Designation not found"], status.HTTP_404_NOT_FOUND)
+            return api_error_response([notFound], status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def delete(self, request, pk):
         try:
-            designation = self.get_object(pk)
-            designation.delete()
+            requestData = self.get_object(pk)
+            requestData.delete()
             return api_response('', modelName, 'delete',status.HTTP_204_NO_CONTENT)
         except Http404:
-            return api_error_response(["Designation not found"], status.HTTP_404_NOT_FOUND)
+            return api_error_response([notFound], status.HTTP_404_NOT_FOUND)
         except Exception as e:
             return api_error_response([str(e)], status.HTTP_500_INTERNAL_SERVER_ERROR)
