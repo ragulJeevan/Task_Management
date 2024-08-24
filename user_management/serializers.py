@@ -12,6 +12,14 @@ class DesignationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+    designation_name = serializers.CharField(source='designation.designation_name', read_only=True)
+    department_name = serializers.CharField(source='department.department_name', read_only=True)
+
     class Meta:
         model = User
-        fields = '__all__'
+        fields = [
+            'id', 'user_name', 'email', 'phone_number', 
+            'designation', 'designation_name', 
+            'department', 'department_name',
+            'created_by', 'created_at', 'updated_by', 'updated_at'
+        ]
