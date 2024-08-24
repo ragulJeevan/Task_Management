@@ -1,34 +1,80 @@
 from rest_framework import serializers
-from .models import Status,Type,Stage,Complexity,Priority,Sdlc
+from user_management.models import User
+from .models import Status, Type, Stage, Complexity, Priority, Sdlc
 
-# Status 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'user_name']
+
 class StatusSerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Status
-        fields = '__all__'
+        fields = [
+            'id', 'status_name', 'description', 'percentage', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
 
-# TYPE 
 class TypeSerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Type
-        fields = '__all__'
-# STAGE 
+        fields = [
+            'id', 'type_name', 'description', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
+
 class StageSerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Stage
-        fields = '__all__'
-# COMPLEXITY 
+        fields = [
+            'id', 'stage_name', 'description', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
+
 class ComplexitySerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Complexity
-        fields = '__all__'
-# PRIORITY 
+        fields = [
+            'id', 'complexity_name', 'description', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
+
 class PrioritySerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Priority
-        fields = '__all__'
-# SDLC 
+        fields = [
+            'id', 'priority_name', 'description', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
+
 class SdlcSerializer(serializers.ModelSerializer):
+    created_by_name = serializers.CharField(source='created_by.user_name', read_only=True)
+    updated_by_name = serializers.CharField(source='updated_by.user_name', read_only=True)
+
     class Meta:
         model = Sdlc
-        fields = '__all__'
+        fields = [
+            'id', 'sdlc_name', 'description', 
+            'created_by', 'created_by_name', 'created_at', 
+            'updated_by', 'updated_by_name', 'updated_at'
+        ]
