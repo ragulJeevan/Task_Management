@@ -49,7 +49,7 @@ class Complexity(models.Model):
     def __str__(self):
         return self.complexity_name
     # PRIORITY 
-class Prority(models.Model):
+class Priority(models.Model):
     priority_name = models.CharField(max_length=255, unique=True)
     description = models.TextField(blank=True, null=True)
     created_by = models.ForeignKey(User, related_name='priority_created_by', on_delete=models.CASCADE)
